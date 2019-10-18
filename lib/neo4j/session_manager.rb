@@ -66,8 +66,9 @@ module Neo4j
           require 'neo4j/core/cypher_session/adaptors/http'
           Neo4j::Core::CypherSession::Adaptors::HTTP
         when :bolt
-          require 'neo4j/core/cypher_session/adaptors/bolt'
-          Neo4j::Core::CypherSession::Adaptors::Bolt
+          require 'neo4j/core/cypher_session/adaptors/driver'
+          require 'neo4j/driver'
+          Neo4j::Core::CypherSession::Adaptors::Driver
         else
           extra = ' (`server_db` has been replaced by `http` or `bolt`)'
           fail ArgumentError, "Invalid session type: #{type.inspect} (expected one of [:http, :bolt, :embedded])#{extra if type == :server_db}"
